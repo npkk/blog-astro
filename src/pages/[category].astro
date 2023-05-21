@@ -1,0 +1,41 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PostCard from "../components/PostCard.astro";
+const { category } = Astro.params;
+
+const posts = (
+    await getCollection("posts", ({ data }) => {
+        return data.category === category! && data.draft === false;
+    })
+).sort((a, b) => -(a.data.createdAt.getTime() - b.data.createdAt.getTime()));
+
+export async function getStaticPaths() {
+    const postEntries = await getCollection("posts");
+    return Array.from(
+        new Set(
+            postEntries.map<String>(({ data }) => {
+                return data.category;
+            })
+        )
+    ).map((category) => ({
+        params: {
+            category,
+        },
+    }));
+}
+---
+
+<BaseLayout title={category!}>
+    <p>Latest posts</p>
+    <div class="border-b-2 border-gray-300 w-full my-2"></div>
+    <ul>
+        {
+            posts.map((post) => (
+                <li>
+                    <PostCard entry={post} />
+                </li>
+            ))
+        }
+    </ul>
+</BaseLayout>

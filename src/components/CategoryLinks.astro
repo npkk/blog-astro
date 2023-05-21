@@ -1,0 +1,20 @@
+---
+import { getCollection } from "astro:content";
+import NavLink from "./NavLink.astro";
+import { capitalize } from "../utils/capitalize";
+
+const categories = Array.from(
+    new Set(
+        (await getCollection("posts")).map<string>(
+            (entry) => entry.data.category
+        )
+    )
+);
+---
+
+{
+    categories.map((category) => (
+        <NavLink href={category} title={capitalize(category)} />
+    ))
+}
+<NavLink href="/about" title="About" />

@@ -1,0 +1,9 @@
+---
+import { SITE_NAME } from "../consts";
+interface Props {
+    title: String;
+}
+const { title } = Astro.props;
+---
+
+<title>{title} - {SITE_NAME}</title>

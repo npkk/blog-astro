@@ -1,0 +1,19 @@
+---
+export interface Props {
+    href: string;
+    title: string;
+}
+
+const { href, title } = Astro.props;
+---
+
+<li class="flex-1 text-center">
+    <a href={href} class="block shadow py-2">{title}</a>
+</li>
+<style>
+    a:hover {
+        /* cant use apply... */
+        /* @apply bg-amber-200; */
+        background-color: rgb(251 191 36);
+    }
+</style>

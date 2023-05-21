@@ -1,0 +1,28 @@
+---
+import { SITE_NAME } from "../consts";
+import CategoryLinks from "./CategoryLinks.astro";
+import NavLink from "./NavLink.astro";
+import SiteDescription from "./SiteDescription.astro";
+---
+
+<header class="bg-amber-200 drop-shadow-lg">
+    <h1 class="font-mono font-bold text-4xl text-center py-3 px-3">
+        <a href="/">{SITE_NAME}</a>
+    </h1>
+    <div id="laptop-menu" class="invisible md:visible h-0 md:h-auto">
+        <SiteDescription />
+        <nav>
+            <ul class="flex flex-row align-center">
+                <CategoryLinks />
+            </ul>
+        </nav>
+    </div>
+    <div id="mobile-menu" class="visible md:invisible h-auto md:h-0">
+        <SiteDescription />
+        <nav>
+            <ul class="flex flex-col align-center">
+                <CategoryLinks />
+            </ul>
+        </nav>
+    </div>
+</header>

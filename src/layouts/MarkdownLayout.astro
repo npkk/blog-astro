@@ -1,0 +1,56 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+const { title } = Astro.props;
+---
+
+<BaseLayout title={title}>
+    <div class="markdown-body">
+        <slot />
+    </div>
+</BaseLayout>
+
+<style is:global>
+    .markdown-body {
+        @apply text-xl font-sans;
+    }
+
+    .markdown-body h1 {
+        @apply block text-4xl font-bold;
+    }
+
+    .markdown-body h2 {
+        @apply block text-3xl font-bold w-full border-b-2 border-gray-300 pb-2;
+    }
+
+    .markdown-body h3 {
+        @apply text-2xl;
+    }
+
+    .markdown-body li {
+        @apply mx-8;
+        list-style-type: disc;
+    }
+
+    .markdown-body a {
+        @apply text-sky-400;
+    }
+
+    .markdown-body pre {
+        @apply my-2 px-4 py-2 rounded-xl;
+    }
+
+    .markdown-body code {
+        counter-reset: step;
+        counter-increment: step 0;
+    }
+
+    .markdown-body code .line::before {
+        content: counter(step);
+        counter-increment: step;
+        width: 1rem;
+        margin-right: 1.5rem;
+        display: inline-block;
+        text-align: right;
+        color: rgba(115, 138, 148, 0.4);
+    }
+</style>
