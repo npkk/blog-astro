@@ -1,0 +1,42 @@
+name: 'Update posts'
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+  schedule: 
+    - cron: '0 2 * * *'
+
+jobs:
+  update-post:
+    runs-on: ubuntu-latest
+    env:
+      TZ: "Asia/Tokyo"
+    outputs:
+      diff: ${{ steps.diff.outputs.diff }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: SSH setting
+        env: 
+          SSH_SECRET: ${{ secrets.SSH_SECRET }}
+        run: |
+          mkdir -p /home/runner/.ssh/
+          echo -e "$SSH_SECRET" > /home/runner/.ssh/id_rsa
+          chmod 600 /home/runner/.ssh/id_rsa
+      - name: Update submodule
+        id: update
+        run: |
+          git submodule sync --recursive
+          git submodule update --init --force --recursive --remote
+      - name: Check diff
+        id: diff
+        run: echo "::set-output name=diff::$(git status -s)"
+      - name: Add and commit files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Update posts at $(date "+DATE: %Y-%m-%d TIME: %H:%M:%S")"
+          git push origin HEAD:${GITHUB_REF}
+        if: ${{ steps.diff.outputs.diff }}
