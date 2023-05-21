@@ -1,0 +1,16 @@
+{
+    "blog-post": {
+        "prefix": "blog-post",
+        "body": [
+          "---",
+          "title: $1",
+          "summary: $2",
+          "draft: false",
+          "createdAt: $3",
+          "updatedAt: $3",
+          "category: $4",
+          "---",
+        ],
+        "description": "blog-post"
+    }
+}
