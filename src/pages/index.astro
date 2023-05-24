@@ -3,9 +3,9 @@ import { getCollection } from "astro:content";
 import Layout from "../layouts/BaseLayout.astro";
 import PostCard from "../components/PostCard.astro";
 
-const posts = (await getCollection("posts", (entry) => !entry.data.draft)).sort(
-	(a, b) => -(a.data.createdAt.getTime() - b.data.createdAt.getTime())
-);
+const posts = (await getCollection("posts", (entry) => !entry.data.draft))
+	.sort((a, b) => -(a.data.createdAt.getTime() - b.data.createdAt.getTime()))
+	.slice(0, 5);
 ---
 
 <Layout title="Home">
