@@ -5,6 +5,8 @@ title: about
 
 ## Author Profile
 
-K.Koba a.k.a. sigsegvvv
+@sigsegvvv
 
 [Twitter](https://twitter.com/sigsegvvv)
+
+My name matches `k(.|.{5})ito`

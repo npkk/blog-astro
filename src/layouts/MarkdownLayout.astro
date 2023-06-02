@@ -46,6 +46,7 @@ const { title } = Astro.props;
     .markdown-body code {
         counter-reset: step;
         counter-increment: step 0;
+        @apply text-base;
     }
 
     .markdown-body code .line::before {
