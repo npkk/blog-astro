@@ -1,3 +1,4 @@
 [submodule "src/content/posts"]
 	path = src/content/posts
 	url = git@github.com:npkk/myblog-post.git
+	ignore = dirty
